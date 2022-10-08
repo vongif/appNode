@@ -32,6 +32,7 @@ const productosSchema = mongoose.Schema({
         type:mongoose.Schema.ObjectId,
         ref:"usuarios"
     },
+    destacado:Boolean
 })
 productosSchema.set("toJSON",{getters:true,setters:true})
 module.exports = mongoose.model("productos",productosSchema)

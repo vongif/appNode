@@ -4,13 +4,11 @@ module.exports={
     getAll: async function(req, res, next) {
         console.log("query",req.query)
         try{
-            const productos = await productosModels.find().populate("category")
-            // const productos = await productosModel.find({destacado:true}).populate("category")
+            const productos = await productosModels.find().populate("category").where({destacado:true})
             res.json(productos);
         }catch(e){
             res.json(e)
-        }
-        
+        } 
     },
     getById: async function(req, res, next) {
         console.log("param",req.params,req.params.id)
@@ -30,7 +28,8 @@ module.exports={
                 description:req.body.description,
                 quantity:req.body.quantity,
                 category:req.body.category,
-                created_by: req.body.userId 
+                created_by: req.body.userId, 
+                destacado:req.body.destacado
             })
             const document = await producto.save()
             res.status(201).json(document)
